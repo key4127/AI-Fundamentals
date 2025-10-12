@@ -27,7 +27,7 @@ class MultiHeadAttention(nn.Module):
         dv = self.dim_v // nh
 
         q = self.linear_q(x).reshape(batch, seq_len, nh, dk).transpose(1, 2)
-        k = self.linear_q(x).reshape(batch, seq_len, nh, dk).transpose(1, 2)
+        k = self.linear_k(x).reshape(batch, seq_len, nh, dk).transpose(1, 2)
         v = self.linear_v(x).reshape(batch, seq_len, nh, dv).transpose(1, 2)
 
         dist = torch.matmul(q, k.transpose(2, 3)) * self._norm_fact
