@@ -26,8 +26,8 @@ class BatchNorm(nn.Module):
             mean = torch.mean(x, dim=0)
             var = torch.var(x, dim=0, unbiased=False)
 
-            self.running_mean = self.momentum * self.running_mean + (1 - self.momentum) * mean
-            self.running_var = self.momentum * self.running_var + (1 - self.momentum) * var
+            self.running_mean = (1 - self.momentum) * self.running_mean + self.momentum * mean
+            self.running_var = (1 - self.momentum) * self.running_var + self.momentum * var
         else:
             mean = self.running_mean
             var = self.running_var
